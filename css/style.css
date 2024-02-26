@@ -25,23 +25,26 @@ body {
   font-size: 3vmin;
 }
 
-#reels {
+#reel-container {
   display: flex;
-  justify-content: space-around;
-  margin-top: 2vmin;
+   overflow: hidden;
 }
 
 .reel {
   width: 14vmin;
   height: 16vmin;
   border: 1vmin solid rgb(25, 100, 126);
+  margin-right: 10px; /* Adjust spacing between reels */
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 2vmin;
-  margin: 0 1vmin;
 }
 
+.symbol img{
+  width: 12vw;
+  height: 12vh;
+}
 #buttons {
   margin-top: 4vmin;
   display: flex;
@@ -67,7 +70,7 @@ body {
   color: rgb(14, 71, 73);
   border: 2px solid rgb(149, 198, 35);
   border-radius: 4px;
-  cursor: pointer;
+  margin-top: 2vmin;
 }
 
 .spin-button:hover {
@@ -75,35 +78,37 @@ body {
   color: rgb(149, 198, 35);
   border: 2px solid rgb(14, 71, 73);
   border-radius: 4px;
-  cursor: pointer;
+}
+
+#stop-button-container{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 3vmin;
 }
 
 .stop-button {
   background-color: rgb(229, 88, 18);
-  color: rgb(132, 51, 11);
   border: 2px solid rgb(229, 88, 18);
-  border-radius: 4px;
-  cursor: pointer;
+  border-radius: 80%;
 }
 
 .stop-button:hover {
   background-color: rgb(132, 51, 11);
-  color: rgb(229, 88, 18);
   border: 2px solid rgb(132, 51, 11);
-  border-radius: 4px;
-  cursor: pointer;
+  border-radius: 80%;
 }
 
 .button{
   background-color: rgb(184, 225, 255); 
-  color: rgb(71, 179, 255);
+  color: rgb(24, 150, 240);
   border: 2px solid rgb(184, 225, 255);
   border-radius: 4px;
 }
 
 .button:hover{
-  background-color: rgb(71, 179, 255); 
+  background-color: rgb(24, 150, 240); 
   color: rgb(184, 225, 255);
-  border: 2px solid rgb(71, 179, 255);
+  border: 2px solid rgb(24, 150, 240);
   border-radius: 4px;
 }

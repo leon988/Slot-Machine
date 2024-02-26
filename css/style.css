@@ -1,58 +1,86 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Kode Mono", monospace;
+  background-color: rgb(255, 214, 133);
   display: flex;
-  justify-content: space-around;
+  align-items: center;
+  justify-content: center;
   height: 100vh;
   margin: 0;
 }
 
 #slot-machine {
-  border: 2vmin solid #000;
-  width: 40vmin;
   padding: 2vmin;
   text-align: center;
 }
 
 #slot-machine h1 {
+  color:rgb(17, 157, 164);
   margin: 0; 
-  font-size: 2vmin; 
+  font-size: 8vmin; 
 }
 
 #balance {
+  color: rgb(75, 63, 114);
   margin-top: 2vmin;
-  font-size: 1.6vmin;
-  border: solid;
+  font-size: 3vmin;
 }
 
 #reels {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-around;
   margin-top: 2vmin;
 }
 
 .reel {
-  width: 12vmin;
-  height: 15vmin;
-  border: .5vmin solid #000;
+  width: 14vmin;
+  height: 16vmin;
+  border: 1vmin solid rgb(25, 100, 126);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 2vmin;
-  margin: .1vmin;
+  margin: 0 1vmin;
 }
 
 #buttons {
-  margin-top: 2vmin;
+  margin-top: 4vmin;
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-content: flex-end;
+  justify-content: space-around;
 }
 
+#button-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 3vmin;
+}
+
+.spin-button,
+.stop-button,
 .button {
   padding: 1vmin 2vmin;
-  margin:  1vmin 0;
-  width: 9em;
-  font-size: 1.2vmin;
+  font-size: 2vmin;
   cursor: pointer;
+}
+
+.spin-button {
+  background-color: rgb(149, 198, 35);
+  color: rgb(14, 71, 73);
+  border: 2px solid rgb(149, 198, 35);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.stop-button {
+  background-color: rgb(229, 88, 18);
+  color: rgb(132, 51, 11);
+  border: 2px solid rgb(229, 88, 18);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.button{
+  background-color: rgb(184, 225, 255); 
+  color: rgb(71, 179, 255);
+  border: 2px solid rgb(184, 225, 255);
+  border-radius: 4px;
 }

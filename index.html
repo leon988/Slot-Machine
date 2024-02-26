@@ -4,24 +4,37 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <script src="js/main.js" defer></script>
 </head>
 <body>
   <main>
-    <h1>SLOT MACHINE</h1>
-    <div id="balance"></div>
-    <div id="reels">
-      <div class="reel">A</div>
-      <div class="reel">B</div>
-      <div class="reel">C</div>
-  </div>
-  <div id="buttons">
-            <button class="button">Bet $1</button>
-            <button class="button">Bet $5</button>
-            <button class="button">Bet $10</button>
-            <button class="button">Bet $20</button>
-        </div>
+    <div id="slot-machine">
+      <h1>SLOT MACHINE</h1>
+
+      <div id="balance">Balance: $100</div>
+
+      <div id="reels">
+          <div class="reel">A</div>
+          <div class="reel">B</div>
+          <div class="reel">C</div>
+      </div>
+
+      <div id="button-container">
+        <button class="spin-button">Spin</button>
+        <button class="stop-button">Stop</button>
+    </div>
+
+      <div id="buttons">
+          <button class="button" >Bet $1</button>
+          <button class="button" >Bet $5</button>
+          <button class="button" >Bet $10</button>
+          <button class="button" >Bet $20</button>
+      </div>
+    </div>
   </main>
 </body>
 </html>

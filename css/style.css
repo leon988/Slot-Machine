@@ -70,6 +70,14 @@ body {
   cursor: pointer;
 }
 
+.spin-button:hover {
+  background-color: rgb(14, 71, 73);
+  color: rgb(149, 198, 35);
+  border: 2px solid rgb(14, 71, 73);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
 .stop-button {
   background-color: rgb(229, 88, 18);
   color: rgb(132, 51, 11);
@@ -78,9 +86,24 @@ body {
   cursor: pointer;
 }
 
+.stop-button:hover {
+  background-color: rgb(132, 51, 11);
+  color: rgb(229, 88, 18);
+  border: 2px solid rgb(132, 51, 11);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
 .button{
   background-color: rgb(184, 225, 255); 
   color: rgb(71, 179, 255);
   border: 2px solid rgb(184, 225, 255);
+  border-radius: 4px;
+}
+
+.button:hover{
+  background-color: rgb(71, 179, 255); 
+  color: rgb(184, 225, 255);
+  border: 2px solid rgb(71, 179, 255);
   border-radius: 4px;
 }

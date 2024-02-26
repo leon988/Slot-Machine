@@ -1,14 +1,17 @@
 /*----- constants -----*/
-const symbols = ["A", "B", "C"]
+const symbols = ["img/Cherry.png", "img/Diamond.png", "img/Seven.png"]
 
 /*----- app's state (variables) -----*/
-let reels = Array.from({length: 3}, getRandomSymbol)
-})
+let balance = 0
+let reels 
+// Array.from({length: 3}, getRandomSymbol)
+let currentWager = 0
 
 /*----- cached element references -----*/
-const reelContainerEl = document.querySelector(".reel-container");
-const spinButtonEl = document.querySelector(".spin-button");
-const stopButtonEl = document.querySelector(".stop-button");
+const reelContainerEl = document.querySelector("#reel-container")
+const spinButtonEl = document.querySelector(".spin-button")
+const stopButtonEl = document.querySelector(".stop-button")
+const wagerButtonEl = document.querySelectorAll("#buttons .button")
 
 /*----- event listeners -----*/
 spinButtonEl.addEventListener("click",function() {
@@ -17,14 +20,27 @@ spinButtonEl.addEventListener("click",function() {
 
 stopButtonEl.addEventListener("click", function () {
   stopReels();
-});
+})
 
+wagerButtonEl.forEach(function(button) {
+  button.addEventListener('click', function(){
+    setWager(button.innerText.replace(/\D/g, ''))
+  })
+})
 /*----- functions -----*/
 init()
 
 function init() {
   renderReels()
 }
+// Set current wager
+function setWager(wager) {
+  currentWager = parseInt(wager);
+  console.log(`Current Wager: $${currentWager}`)
+
+  spinButtonEl.removeAttribute("disabled")
+}
+
 //To get random symbols
 function getRandomSymbol() {
   return symbols[Math.floor(Math.random() * symbols.length)]
@@ -32,33 +48,34 @@ function getRandomSymbol() {
 
 // Update reels state
 function renderReels() {
+  reels = Array.from({length: 3}, getRandomSymbol)
   reelContainerEl.innerHTML = ""
   reels.forEach(function (symbol) {
-    const reelElement = document.createElement("div")
+    let reelElement = document.createElement("img")
     reelElement.classList.add("reel")
-    reelElement.textContent = symbol
+    reelElement.src = symbol
     reelContainerEl.appendChild(reelElement)
   })
 }
 
-//Fisher-Yates algorithm to shuffle symbols
-function shuffleReels() {
-  for (let i = reels.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [reels[i], reels[j]] = [reels[j], reels[i]];
-  }
-  renderReels()
-}
-
 //Timer for spin
 function spinReels() {
-  console.log('Spinning reels...')
-  let spinTimer = setTimeout(function(){
-    stopReels()
-  }, 3000)
-  //Add a new frame every
-  let shuffleInterval = setInterval(function(){
-    shuffleReels()
-  }, 200)
+  if (currentWager > 0) {
+    console.log('Spinning reels')
+    reelContainerEl.classList.add("spinning")
+  
+    // Set a timer to stop the reels 
+    const spinTimer = setTimeout(function() {
+      stopReels()
+    }, 3000)
+    spinButtonEl.dataset.spinTimer = spinTimer;
+  }
 }
 
+function stopReels() {
+  renderReels()
+  console.log('Stopping reels')
+  clearTimeout(Number(spinButtonEl.dataset.spinTimer))
+  reelContainerEl.classList.remove("spinning");
+  console.log('Reels stopped')
+}

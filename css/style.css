@@ -28,7 +28,7 @@ body {
 
 #reel-container {
   display: flex;
-   overflow: hidden;
+  overflow: hidden;
 }
 
 .reel {

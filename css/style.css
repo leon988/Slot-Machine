@@ -19,6 +19,13 @@ body {
   font-size: 8vmin; 
 }
 
+#tries{
+  color: rgb(114, 63, 110);
+  margin-top: 1vmin;
+  font-size: 3vmin;
+  margin-bottom: 2vmin;
+}
+
 #balance {
   color: rgb(75, 63, 114);
   margin-top: 2vmin;
@@ -28,7 +35,7 @@ body {
 
 #reel-container {
   display: flex;
-  overflow: hidden;
+  backface-visibility: hidden;
 }
 
 .reel {
@@ -41,6 +48,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background: white;
 }
 
 .symbol img{
@@ -60,6 +68,7 @@ body {
 }
 
 .spin-button,
+.play-button
 .stop-button,
 .button {
   padding: 1vmin 2vmin;
@@ -79,6 +88,22 @@ body {
   background-color: rgb(14, 71, 73);
   color: rgb(149, 198, 35);
   border: 2px solid rgb(14, 71, 73);
+  border-radius: 4px;
+}
+
+.play-button{
+  display: none;
+  background-color: black;
+  color: white;
+  border: 2px solid black;
+  border-radius: 4px;
+  margin-top: 2vmin;
+}
+
+.play-button:hover{
+  background-color: white;
+  color: black;
+  border: 2px solid white;
   border-radius: 4px;
 }
 

@@ -1,8 +1,8 @@
 /*----- constants -----*/
 const symbols = ["img/Cherry.png", "img/Diamond.png", "img/Seven.png"]
 const winningPatterns = [
-  { symbols: ["img/Cherry.png", "img/Cherry.png", "img/Cherry.png"], payout: 10},
-  { symbols: ["img/Diamond.png", "img/Diamond.png", "img/Diamond.png"], payout: 10},
+  { symbols: ["img/Cherry.png", "img/Cherry.png", "img/Cherry.png"],},
+  { symbols: ["img/Diamond.png", "img/Diamond.png", "img/Diamond.png"],},
   { symbols: ["img/Seven.png", "img/Seven.png", "img/Seven.png"]},
 ]
 
@@ -11,17 +11,35 @@ let balance = 0
 let reels 
 // Array.from({length: 3}, getRandomSymbol)
 let currentWager = 0
+let maxTries = 3
+let remainingTries = maxTries
 
 /*----- cached element references -----*/
 const reelContainerEl = document.querySelector("#reel-container")
 const spinButtonEl = document.querySelector(".spin-button")
 const stopButtonEl = document.querySelector(".stop-button")
 const wagerButtonEl = document.querySelectorAll("#buttons .button")
-const balanceEl = document.querySelector("#balance");
+const balanceEl = document.querySelector("#balance")
+const triesEl = document.querySelector("#tries")
+const playButtonEl = document.querySelector(".play-button")
 
 /*----- event listeners -----*/
-spinButtonEl.addEventListener("click",function() {
-  spinReels()
+spinButtonEl.addEventListener("click", function () {
+  if (remainingTries > 0) {
+    spinReels()
+    remainingTries--
+    updateTries()
+    console.log(`Remaining Tries: ${remainingTries}`)
+  } else if(remainingTries === 0){
+    playButtonEl.style.display = "block"
+    playButtonEl.addEventListener("click", resetGame)
+    spinButtonEl.setAttribute("disabled", "true")
+    console.log("No more tries. Game over!")
+    } else {
+      console.log("No more tries. Game over!")
+      playButtonEl.style.display = "block"
+      playButtonEl.addEventListener("click", resetGame)
+    }
 })
 
 stopButtonEl.addEventListener("click", function () {
@@ -40,6 +58,8 @@ init()
 function init() {
   renderReels()
   updateBalance()
+  updateTries()
+  resetGame()
 }
 // Set current wager
 function setWager(wager) {
@@ -47,7 +67,6 @@ function setWager(wager) {
   console.log(`Current Wager: $${currentWager}`)
   spinButtonEl.removeAttribute("disabled")
 }
-
 
 //To get random symbols
 function getRandomSymbol() {
@@ -67,6 +86,21 @@ function renderReels() {
   checkWinningPatterns()
 }
 
+// Update amount of tries
+function updateTries() {
+  triesEl.textContent = `Amount of tries left: ${remainingTries}`
+}
+
+// Handle play again button
+function resetGame() {
+  remainingTries = maxTries
+  balance
+  updateTries()
+  spinButtonEl.removeAttribute( "disabled" )
+  playButtonEl.style.display= 'none'
+  updateBalance()
+}
+
 //Timer for spin
 function spinReels() {
   if (currentWager > 0) {
@@ -82,6 +116,7 @@ function spinReels() {
 
 function stopReels() {
   renderReels()
+  checkWinningPatterns()
   console.log('Stopping reels')
   clearTimeout(Number(spinButtonEl.dataset.spinTimer))
   reelContainerEl.classList.remove("spinning");
@@ -90,24 +125,23 @@ function stopReels() {
 
 // Update balance
 function updateBalance() {
-  balanceEl.textContent = `Balance: $${balance}`;
+  balanceEl.textContent = `Balance: $${balance}`
 }
 
 //  Check each winning pattern and pay out winnings
 function checkWinningPatterns(){
-  for (const pattern of winningPatterns){
     if (
-      reels[0] === pattern.symbols[0]  && 
-      reels[1] === pattern.symbols[1]  && 
-      reels[2] === pattern.symbols[2]
+      reels[0] === symbols[0]  && 
+      reels[1] === symbols[1]  && 
+      reels[2] === symbols[2]
       ) {
         balance += currentWager 
         console.log(`You won ${currentWager}!`)
         updateBalance()
         return
+    } else {
+    console.log(`You lost!`)
+    updateBalance()
     }
   }
-  balance -= currentWager;
-  console.log(`You lost!`)
-  updateBalance()
-}
+

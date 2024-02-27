@@ -9,10 +9,10 @@ const winningPatterns = [
 /*----- app's state (variables) -----*/
 let balance = 0
 let reels 
-// Array.from({length: 3}, getRandomSymbol)
 let currentWager = 0
-let maxTries = 3
-let remainingTries = maxTries
+let remainingTries = 3
+let spin
+let spinInterval
 
 /*----- cached element references -----*/
 const reelContainerEl = document.querySelector("#reel-container")
@@ -30,16 +30,12 @@ spinButtonEl.addEventListener("click", function () {
     remainingTries--
     updateTries()
     console.log(`Remaining Tries: ${remainingTries}`)
-  } else if(remainingTries === 0){
+  } else if (remainingTries === 0) {
+    spinButtonEl.setAttribute("disabled", "true")
     playButtonEl.style.display = "block"
     playButtonEl.addEventListener("click", resetGame)
-    spinButtonEl.setAttribute("disabled", "true")
     console.log("No more tries. Game over!")
-    } else {
-      console.log("No more tries. Game over!")
-      playButtonEl.style.display = "block"
-      playButtonEl.addEventListener("click", resetGame)
-    }
+  }
 })
 
 stopButtonEl.addEventListener("click", function () {
@@ -48,7 +44,7 @@ stopButtonEl.addEventListener("click", function () {
 
 wagerButtonEl.forEach(function(button) {
   button.addEventListener('click', function() {
-    setWager(button.dataset.wager);
+    setWager(button.dataset.wager)
   })
 })
 
@@ -61,6 +57,7 @@ function init() {
   updateTries()
   resetGame()
 }
+
 // Set current wager
 function setWager(wager) {
   currentWager = parseInt(wager)
@@ -91,36 +88,32 @@ function updateTries() {
   triesEl.textContent = `Amount of tries left: ${remainingTries}`
 }
 
-// Handle play again button
-function resetGame() {
-  remainingTries = maxTries
-  balance
-  updateTries()
-  spinButtonEl.removeAttribute( "disabled" )
-  playButtonEl.style.display= 'none'
-  updateBalance()
-}
-
 //Timer for spin
 function spinReels() {
   if (currentWager > 0) {
     console.log('Spinning reels')
     reelContainerEl.classList.add("spinning")
+    // Symbol change
+    spinInterval = setInterval(function() {
+       renderReelsSymbols()
+    }, 100)
     // Set a timer to stop the reels 
     const spinTimer = setTimeout(function() {
       stopReels()
+      checkWinningPatterns()
     }, 3000)
-    spinButtonEl.dataset.spinTimer = spinTimer;
+    spinButtonEl.dataset.spinTimer = spinTimer
   }
 }
 
 function stopReels() {
+  clearInterval(spinInterval)
   renderReels()
-  checkWinningPatterns()
   console.log('Stopping reels')
   clearTimeout(Number(spinButtonEl.dataset.spinTimer))
-  reelContainerEl.classList.remove("spinning");
+  reelContainerEl.classList.remove("spinning")
   console.log('Reels stopped')
+  checkWinningPatterns()
 }
 
 // Update balance
@@ -140,8 +133,29 @@ function checkWinningPatterns(){
         updateBalance()
         return
     } else {
-    console.log(`You lost!`)
     updateBalance()
     }
   }
 
+// Render reels changing symbols 
+function renderReelsSymbols() {
+  reelContainerEl.innerHTML = ""
+  reels = reels.map(getRandomSymbol)
+
+  reels.forEach(function(symbol) { 
+    let reelElement = document.createElement("img")
+    reelElement.classList.add("reel")
+    reelElement.src = symbol
+    reelContainerEl.appendChild(reelElement)
+  })
+}
+
+// Handle play again button
+function resetGame() {
+  remainingTries = 3
+  balance = 0
+  updateTries()
+  spinButtonEl.removeAttribute( "disabled" )
+  playButtonEl.style.display = "none"
+  updateBalance()
+}

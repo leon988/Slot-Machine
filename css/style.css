@@ -111,6 +111,9 @@ body {
   background-color: rgb(229, 88, 18);
   color: rgb(132, 51, 11);
   border: 2px solid rgb(229, 88, 18);
+  font-size: 2vmin;
+  padding-right: 2vmin;
+  padding-left: 2vmin;
   border-radius: 4px;
   margin-top: 2vmin;
 }

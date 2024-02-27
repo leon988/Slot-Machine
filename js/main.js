@@ -1,11 +1,10 @@
 /*----- constants -----*/
 const symbols = ["img/Cherry.png", "img/Diamond.png", "img/Seven.png"]
 const winningPatterns = [
-  { symbols: ["img/Cherry.png", "img/Cherry.png", "img/Cherry.png"]},
-  { symbols: ["img/Diamond.png", "img/Diamond.png", "img/Diamond.png"]},
+  { symbols: ["img/Cherry.png", "img/Cherry.png", "img/Cherry.png"], payout: 10},
+  { symbols: ["img/Diamond.png", "img/Diamond.png", "img/Diamond.png"], payout: 10},
   { symbols: ["img/Seven.png", "img/Seven.png", "img/Seven.png"]},
-  // Add more winning patterns as needed
-];
+]
 
 /*----- app's state (variables) -----*/
 let balance = 0
@@ -26,14 +25,15 @@ spinButtonEl.addEventListener("click",function() {
 })
 
 stopButtonEl.addEventListener("click", function () {
-  stopReels();
+  stopReels()
 })
 
 wagerButtonEl.forEach(function(button) {
-  button.addEventListener('click', function(){
-    setWager(button.innerText.replace(/\D/g, ''))
+  button.addEventListener('click', function() {
+    setWager(button.dataset.wager);
   })
 })
+
 /*----- functions -----*/
 init()
 
@@ -43,10 +43,11 @@ function init() {
 }
 // Set current wager
 function setWager(wager) {
-  currentWager = parseInt(wager);
+  currentWager = parseInt(wager)
   console.log(`Current Wager: $${currentWager}`)
   spinButtonEl.removeAttribute("disabled")
 }
+
 
 //To get random symbols
 function getRandomSymbol() {
@@ -99,14 +100,14 @@ function checkWinningPatterns(){
       reels[0] === pattern.symbols[0]  && 
       reels[1] === pattern.symbols[1]  && 
       reels[2] === pattern.symbols[2]
-    ) {
-      balance += currentWager * pattern.payout
-      console.log(`You won ${currentWager * pattern.payout}!`)
-      updateBalance()
-      return
+      ) {
+        balance += currentWager 
+        console.log(`You won ${currentWager}!`)
+        updateBalance()
+        return
     }
   }
   balance -= currentWager;
-  console.log(`You lost ${currentWager}!`)
+  console.log(`You lost!`)
+  updateBalance()
 }
-

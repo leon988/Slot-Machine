@@ -17,7 +17,6 @@ let spinInterval
 /*----- cached element references -----*/
 const reelContainerEl = document.querySelector("#reel-container")
 const spinButtonEl = document.querySelector(".spin-button")
-// const stopButtonEl = document.querySelector(".stop-button")
 const wagerButtonEl = document.querySelectorAll("#buttons .button")
 const balanceEl = document.querySelector("#balance")
 const triesEl = document.querySelector("#tries")
@@ -41,11 +40,7 @@ spinButtonEl.addEventListener("click", function() {
 
 playButtonEl.addEventListener("click", function() {
   resetGame()
-});
-
-// stopButtonEl.addEventListener("click", function () {
-//   stopReels()
-// })
+})
 
 wagerButtonEl.forEach(function(button) {
   button.addEventListener('click', function() {
@@ -86,7 +81,6 @@ function renderReels() {
     reelElement.src = symbol
     reelContainerEl.appendChild(reelElement)
   })
-  // checkWinningPatterns()
 }
 
 // Update amount of tries

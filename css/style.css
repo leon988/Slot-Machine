@@ -107,24 +107,6 @@ body {
   border-radius: 4px;
 }
 
-/* .stop-button {
-  background-color: rgb(229, 88, 18);
-  color: rgb(132, 51, 11);
-  border: 2px solid rgb(229, 88, 18);
-  font-size: 2vmin;
-  padding-right: 2vmin;
-  padding-left: 2vmin;
-  border-radius: 4px;
-  margin-top: 2vmin;
-}
-
-.stop-button:hover {
-  background-color: rgb(132, 51, 11);
-  color: rgb(229, 88, 18);
-  border: 2px solid rgb(132, 51, 11);
-  border-radius: 4px;
-} */
-
 .button{
   background-color: rgb(184, 225, 255); 
   color: rgb(24, 150, 240);

@@ -17,14 +17,14 @@ let spinInterval
 /*----- cached element references -----*/
 const reelContainerEl = document.querySelector("#reel-container")
 const spinButtonEl = document.querySelector(".spin-button")
-const stopButtonEl = document.querySelector(".stop-button")
+// const stopButtonEl = document.querySelector(".stop-button")
 const wagerButtonEl = document.querySelectorAll("#buttons .button")
 const balanceEl = document.querySelector("#balance")
 const triesEl = document.querySelector("#tries")
 const playButtonEl = document.querySelector(".play-button")
 
 /*----- event listeners -----*/
-spinButtonEl.addEventListener("click", function () {
+spinButtonEl.addEventListener("click", function() {
   if (remainingTries > 0) {
     spinReels()
     remainingTries--
@@ -33,14 +33,19 @@ spinButtonEl.addEventListener("click", function () {
   } else if (remainingTries === 0) {
     spinButtonEl.setAttribute("disabled", "true")
     playButtonEl.style.display = "block"
+    playButtonEl.removeEventListener("click", resetGame)
     playButtonEl.addEventListener("click", resetGame)
     console.log("No more tries. Game over!")
   }
-})
+});
 
-stopButtonEl.addEventListener("click", function () {
-  stopReels()
-})
+playButtonEl.addEventListener("click", function() {
+  resetGame()
+});
+
+// stopButtonEl.addEventListener("click", function () {
+//   stopReels()
+// })
 
 wagerButtonEl.forEach(function(button) {
   button.addEventListener('click', function() {
@@ -55,6 +60,7 @@ function init() {
   renderReels()
   updateBalance()
   updateTries()
+  checkForGameOver()
   resetGame()
 }
 
@@ -80,12 +86,13 @@ function renderReels() {
     reelElement.src = symbol
     reelContainerEl.appendChild(reelElement)
   })
-  checkWinningPatterns()
+  // checkWinningPatterns()
 }
 
 // Update amount of tries
 function updateTries() {
   triesEl.textContent = `Amount of tries left: ${remainingTries}`
+  checkForGameOver()
 }
 
 //Timer for spin
@@ -95,15 +102,32 @@ function spinReels() {
     reelContainerEl.classList.add("spinning")
     // Symbol change
     spinInterval = setInterval(function() {
-       renderReelsSymbols()
+      renderReelsSymbols()
     }, 100)
-    // Set a timer to stop the reels 
+    // Set a timer to stop the reels
     const spinTimer = setTimeout(function() {
       stopReels()
-      checkWinningPatterns()
     }, 3000)
     spinButtonEl.dataset.spinTimer = spinTimer
   }
+}
+
+//  Check each winning pattern and pay out winnings
+function checkWinningPatterns() {
+  // for (const pattern of winningPatterns) {
+    if (
+      reels[0] === symbols[0]  &&
+      reels[1] === symbols[1]  && 
+      reels[2] === symbols[2]
+    ) {
+      balance += currentWager
+      console.log(balance)
+      console.log(`You won ${currentWager}!`)
+      updateBalance()
+      return
+    }
+  // }
+  updateBalance()
 }
 
 function stopReels() {
@@ -114,6 +138,7 @@ function stopReels() {
   reelContainerEl.classList.remove("spinning")
   console.log('Reels stopped')
   checkWinningPatterns()
+  checkForGameOver()
 }
 
 // Update balance
@@ -121,21 +146,6 @@ function updateBalance() {
   balanceEl.textContent = `Balance: $${balance}`
 }
 
-//  Check each winning pattern and pay out winnings
-function checkWinningPatterns(){
-    if (
-      reels[0] === symbols[0]  && 
-      reels[1] === symbols[1]  && 
-      reels[2] === symbols[2]
-      ) {
-        balance += currentWager 
-        console.log(`You won ${currentWager}!`)
-        updateBalance()
-        return
-    } else {
-    updateBalance()
-    }
-  }
 
 // Render reels changing symbols 
 function renderReelsSymbols() {
@@ -148,6 +158,14 @@ function renderReelsSymbols() {
     reelElement.src = symbol
     reelContainerEl.appendChild(reelElement)
   })
+}
+
+function checkForGameOver() {
+  if (remainingTries === 0) {
+    playButtonEl.style.display = 'block'
+  } else {
+    playButtonEl.style.display = 'none'
+  }
 }
 
 // Handle play again button

@@ -1,4 +1,5 @@
-# <Your Project's Title>
+# <Slot Machine>
+Welcome to the Slot Machine Game! Spin the reels, test your luck, and see if you can hit the jackpot!
 A description of your game. Background info of the game is a nice touch.
 
 # Screenshot
@@ -11,7 +12,6 @@ A description of your game. Background info of the game is a nice touch.
 - JavaScript
 - HTML
 - CSS
-- CardStarter CSS Library
 
 # Getting Started
 
@@ -20,5 +20,6 @@ A description of your game. Background info of the game is a nice touch.
 
 # Next Steps
 
-- Future enhancement one...
-- Future enhancement two... 
+- Sound Effects and Animations: Add subtle sound effects and animations to enhance the overall gaming experience.
+- Expanded Winning Combinations: Expand the range of winning possibilities on the reels, providing players with frequent small win
+- Resizable Reels:  Implement functionality for users to resize the reel

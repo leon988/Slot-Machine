@@ -7,7 +7,7 @@ const winningPatterns = [
 ]
 
 /*----- app's state (variables) -----*/
-let balance = 0
+let balance = 100
 let reels 
 let currentWager = 0
 let remainingTries = 3
@@ -114,11 +114,11 @@ function spinReels() {
 
 //  Check each winning pattern and pay out winnings
 function checkWinningPatterns() {
-  // for (const pattern of winningPatterns) {
+    console.log(reels)
+    console.log(symbols)
     if (
-      reels[0] === symbols[0]  &&
-      reels[1] === symbols[1]  && 
-      reels[2] === symbols[2]
+      reels[0] === reels[1]  &&
+      reels[1] === reels[2]  
     ) {
       balance += currentWager
       console.log(balance)
@@ -126,8 +126,8 @@ function checkWinningPatterns() {
       updateBalance()
       return
     }
-  // }
-  updateBalance()
+    balance -= currentWager
+    updateBalance()
 }
 
 function stopReels() {
@@ -145,6 +145,8 @@ function stopReels() {
 function updateBalance() {
   balanceEl.textContent = `Balance: $${balance}`
 }
+
+console.log(balance)
 
 // Render reels changing symbols 
 function renderReelsSymbols() {
@@ -170,7 +172,7 @@ function checkForGameOver() {
 // Handle play again button
 function resetGame() {
   remainingTries = 3
-  balance = 0
+  balance = 100
   updateTries()
   spinButtonEl.removeAttribute( "disabled" )
   playButtonEl.style.display = "none"

@@ -146,7 +146,6 @@ function updateBalance() {
   balanceEl.textContent = `Balance: $${balance}`
 }
 
-
 // Render reels changing symbols 
 function renderReelsSymbols() {
   reelContainerEl.innerHTML = ""

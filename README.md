@@ -1,5 +1,5 @@
 # Slot Machine
-Welcome to the Slot Machine Game 🎰! Spin the reels, test your luck, and see if you can hit the jackpot! This project holds a special place in my heart as it represents my initial steps into the world of programming. From conceptualizing the idea to writing the first line of code, each moment has been a learning experience 😄.
+Welcome to the Slot Machine Game 🎰! Spin the reels and see if you can hit the jackpot! This project holds a special place in my heart as it represents my initial steps into the world of programming. From conceptualizing the idea to writing the first line of code, each moment has been a learning experience 😄.
 
 # Screenshot
 

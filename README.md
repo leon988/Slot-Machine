@@ -1,5 +1,5 @@
 # Slot Machine
-Welcome to the Slot Machine Game 🎰! Spin the reels and see if you can hit the jackpot! Give those reels a spin and let the excitement unfold. Welcome to a gaming adventure where fortune favors the bold and every spin holds the promise of a thrilling win!.
+Welcome to the Slot Machine Game 🎰! Spin the reels and see if you can hit the jackpot! Give those reels a spin and let the excitement unfold. Welcome to a gaming adventure where fortune favors the bold and every spin holds the promise of a thrilling win!
 
 # Screenshot
 
